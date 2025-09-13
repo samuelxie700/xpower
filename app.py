@@ -1,68 +1,3 @@
-<<<<<<< HEAD
-from flask import Flask, render_template, request, redirect, url_for, flash
-import pandas as pd
-from fixed_rate import fixed_rate_bill
-
-app = Flask(__name__)
-app.secret_key = "dev"
-
-# 默认值
-DEFAULT_RATE = 0.25
-DEFAULT_FIXED_FEE = 10.0
-
-@app.route("/", methods=["GET", "POST"])
-def index():
-    if request.method == "POST":
-        file = request.files.get("file")
-
-        # 解析输入
-        try:
-            rate = float(request.form.get("rate", DEFAULT_RATE))
-            fixed_fee = float(request.form.get("fixed_fee", DEFAULT_FIXED_FEE))
-        except ValueError:
-            flash("费率或固定费用输入不合法。")
-            return redirect(url_for("index"))
-
-        if not file:
-            flash("请上传 CSV 文件。")
-            return redirect(url_for("index"))
-
-        try:
-            df = pd.read_csv(file)
-            if "kWh" not in df.columns:
-                flash("CSV 必须包含列名：kWh")
-                return redirect(url_for("index"))
-
-            total_usage = float(df["kWh"].sum())
-            total_bill = float(fixed_rate_bill(total_usage, rate, fixed_fee))
-
-            rows = df.head(200).to_dict(orient="records")
-
-            return render_template(
-                "index.html",
-                total_usage=round(total_usage, 2),
-                total_bill=round(total_bill, 2),
-                rate=rate,
-                fixed_fee=fixed_fee,
-                rows=rows,
-            )
-        except Exception as e:
-            flash(f"处理失败：{e}")
-            return redirect(url_for("index"))
-
-    # GET：传默认值，避免未定义
-    return render_template(
-        "index.html",
-        total_usage=None,
-        total_bill=None,
-        rate=DEFAULT_RATE,
-        fixed_fee=DEFAULT_FIXED_FEE,
-        rows=None,
-    )
-
-if __name__ == "__main__":
-    app.run(debug=True)
-=======
 from __future__ import annotations
 from flask import Flask, render_template, request, flash, jsonify, send_from_directory
 import pandas as pd
@@ -198,4 +133,3 @@ def report_cov():
 if __name__ == "__main__":
     # 禁用 reloader，避免双进程导致“写在A、看在B”的不同步
     app.run(debug=True, use_reloader=False)
->>>>>>> ba87982 (init xpower (fix broken .git/config))

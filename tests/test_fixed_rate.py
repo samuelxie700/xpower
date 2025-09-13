@@ -1,8 +1,8 @@
-<<<<<<< HEAD
+
 # ---- 放在最前面 ----
-=======
+
 # ---- 放在最前面，确保能找到 fixed_rate.py ----
->>>>>>> ba87982 (init xpower (fix broken .git/config))
+
 import os, sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
@@ -10,7 +10,7 @@ import pandas as pd
 import pytest
 from fixed_rate import fixed_rate_bill, main
 
-<<<<<<< HEAD
+
 def test_fixed_rate_bill_normal():
     assert fixed_rate_bill(300, 0.25, 10) == 85
 
@@ -25,7 +25,7 @@ def test_fixed_rate_bill_raises_on_negative():
     with pytest.raises(ValueError):
         fixed_rate_bill(100, 0.25, -10)
 
-=======
+
 
 # ================================
 # A. 等价类测试（Typical cases）
@@ -79,7 +79,7 @@ def test_fixed_rate_invalid_typeerror(usage, rate, fee):
 # ================================
 # D. 主函数运行测试（I/O 隔离）
 # ================================
->>>>>>> ba87982 (init xpower (fix broken .git/config))
+
 def test_main_runs_without_error(monkeypatch, capsys):
     # 用假的 DataFrame 替代真实 CSV
     fake_df = pd.DataFrame({"kWh": [1.0, 2.0, 3.0]})

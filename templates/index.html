@@ -5,40 +5,14 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>XPower — 固定费率账单演示</title>
 
-<<<<<<< HEAD
-  <!-- 正确拼写的 CSS 路径 -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
-  <!-- Chart.js 用于绘图 -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-=======
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>.row-btns{display:flex;gap:8px;flex-wrap:wrap}</style>
->>>>>>> ba87982 (init xpower (fix broken .git/config))
 </head>
 <body>
 <main class="container">
   <h1>XPower — 固定费率账单</h1>
 
-<<<<<<< HEAD
-  <!-- 消息提示 -->
-  {% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <div class="flash">
-      {% for m in messages %}
-      <p>{{ m }}</p>
-      {% endfor %}
-    </div>
-  {% endif %}
-  {% endwith %}
-
-  <!-- 上传和输入表单 -->
-  <form method="post" enctype="multipart/form-data" class="card">
-    <label>上传 CSV（需包含列：kWh）</label>
-    <input type="file" name="file" accept=".csv" required />
-
-=======
   {% with messages = get_flashed_messages() %}
   {% if messages %}
     <div class="flash success">{% for m in messages %}<p>{{ m }}</p>{% endfor %}</div>
@@ -49,7 +23,6 @@
   <form method="post" enctype="multipart/form-data" class="card">
     <label>上传 CSV（需包含列：kWh）</label>
     <input type="file" name="file" accept=".csv" required />
->>>>>>> ba87982 (init xpower (fix broken .git/config))
     <div class="grid2">
       <div>
         <label>费率 ($/kWh)</label>
@@ -60,17 +33,9 @@
         <input type="number" step="0.01" name="fixed_fee" value="{{ fixed_fee|default(10, true) }}" required />
       </div>
     </div>
-<<<<<<< HEAD
-
-    <button type="submit">计算账单</button>
-  </form>
-
-  <!-- 结果展示 -->
-=======
     <button type="submit" class="btn primary">计算账单</button>
   </form>
 
->>>>>>> ba87982 (init xpower (fix broken .git/config))
   {% if total_bill is not none %}
   <section class="card">
     <h2>计算结果</h2>
@@ -85,54 +50,22 @@
   {% if rows %}
   <section class="card">
     <h2>用电趋势（前 200 行）</h2>
-<<<<<<< HEAD
-    <canvas id="usageChart" height="120"></canvas>
-=======
     <canvas id="usageChart" height="110"></canvas>
->>>>>>> ba87982 (init xpower (fix broken .git/config))
   </section>
 
   <section class="card">
     <h2>数据预览（前 200 行）</h2>
     <div class="table-wrap">
       <table>
-<<<<<<< HEAD
-        <thead>
-          <tr>
-            {% for k in rows[0].keys() %}
-            <th>{{ k }}</th>
-            {% endfor %}
-          </tr>
-        </thead>
-        <tbody>
-          {% for r in rows %}
-          <tr>
-            {% for v in r.values() %}
-            <td>{{ v }}</td>
-            {% endfor %}
-          </tr>
-          {% endfor %}
-=======
         <thead><tr>{% for k in rows[0].keys() %}<th>{{ k }}</th>{% endfor %}</tr></thead>
         <tbody>
           {% for r in rows %}<tr>{% for v in r.values() %}<td>{{ v }}</td>{% endfor %}</tr>{% endfor %}
->>>>>>> ba87982 (init xpower (fix broken .git/config))
         </tbody>
       </table>
     </div>
   </section>
   {% endif %}
   {% endif %}
-<<<<<<< HEAD
-</main>
-
-<!-- 图表渲染 -->
-{% if rows %}
-<script id="rows-data" type="application/json">
-  {{ rows|default([], true)|tojson }}
-</script>
-
-=======
 
   <!-- 测试与覆盖率：只保留“后台运行 + 新标签查看” -->
   <section class="card">
@@ -160,36 +93,15 @@
 
 {% if rows %}
 <script id="rows-data" type="application/json">{{ rows|default([], true)|tojson }}</script>
->>>>>>> ba87982 (init xpower (fix broken .git/config))
 <script>
   const rows = JSON.parse(document.getElementById('rows-data').textContent);
   const labels = rows.map((_, i) => i + 1);
   const data = rows.map(r => Number(r.kWh));
-<<<<<<< HEAD
-
-  const ctx = document.getElementById('usageChart').getContext('2d');
-  new Chart(ctx, {
-    type: 'line',
-    data: { labels, datasets: [{ label: 'kWh', data }] },
-    options: {
-      responsive: true,
-      scales: {
-        x: { title: { display: true, text: '记录序号' } },
-        y: { title: { display: true, text: 'kWh' } }
-      }
-    }
-  });
-</script>
-{% endif %}
-
-
-=======
   const ctx = document.getElementById('usageChart').getContext('2d');
   new Chart(ctx, { type:'line', data:{ labels, datasets:[{ label:'kWh', data }] },
     options:{ responsive:true, scales:{ x:{ title:{ display:true, text:'记录序号'}},
                                        y:{ title:{ display:true, text:'kWh'}}}}});
 </script>
 {% endif %}
->>>>>>> ba87982 (init xpower (fix broken .git/config))
 </body>
 </html>

@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 :root { --bg:#0b0d10; --card:#151922; --text:#e7e7e7; --muted:#a5adba; --accent:#8ab4f8; }
 *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font:14px/1.6 system-ui,Segoe UI,Arial}
 .container{max-width:980px;margin:40px auto;padding:0 16px}
@@ -16,7 +16,7 @@ button{margin-top:12px;padding:10px 14px;border-radius:10px;border:0;background:
 .table-wrap{overflow:auto;max-height:360px;border:1px solid #222;border-radius:8px}
 table{width:100%;border-collapse:collapse}
 th,td{padding:8px;border-bottom:1px solid #222;white-space:nowrap}
-=======
+
 body {
   background: #ffffff;
   color: #111;
@@ -161,5 +161,5 @@ th {
   text-align: left;
 }
 
->>>>>>> ba87982 (init xpower (fix broken .git/config))
+
 

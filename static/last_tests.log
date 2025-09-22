@@ -1,0 +1,5 @@
+ERROR: usage: __main__.py [options] [file_or_dir] [file_or_dir] [...]
+__main__.py: error: unrecognized arguments: --html /Users/samuel/Documents/xpower-main/static/unit_grade.html --self-contained-html
+  inifile: None
+  rootdir: /Users/samuel/Documents/xpower-main
+
